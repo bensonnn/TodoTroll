@@ -1,7 +1,6 @@
 
-
 .container {
-	width: 30%;
+	width: 400px;
 	margin: 100px auto;
 	background-color: #FFFFFF;
 	padding: 20px;
@@ -20,7 +19,7 @@ ul input {
 	padding: 0;
 	background-color: transparent;
 	border: none;
-	width: 300px;
+	width: 350px;
 	color: white;
 }
 

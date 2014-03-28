@@ -32,7 +32,6 @@ $(function() {
 				TodoList.delete($(key.target).next().text())
 			}
 		}
-
 	}
 
 	var TodoView =  {
@@ -43,7 +42,6 @@ $(function() {
 			})
 		}
 	}
-
 
 	function Todo(text, index) {
 		this.text = text;
@@ -56,7 +54,6 @@ $(function() {
 		this.color = ColorGen.color();
 	}
 
-
 	Todo.prototype = {
 		finish : function() {
 			this.complete = true;
@@ -65,7 +62,6 @@ $(function() {
 			this.complete = false;
 		}
 	}
-
 
 	var TodoList = {
 		todos : [],
@@ -84,7 +80,6 @@ $(function() {
 			TodoView.update(this.todos)
 		},
 		delete : function(index) {
-			console.log(index)
 			this.todos = _.reject(this.todos, function(todo){ return todo.index == index; })
 			TodoView.update(this.todos)
 		}
@@ -94,5 +89,3 @@ $(function() {
 	controller.bindEvents();
 
 })
-
-
