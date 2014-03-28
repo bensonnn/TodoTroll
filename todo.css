@@ -15,7 +15,21 @@ ul {
 	list-style: none;
 }
 
-li {
+ul input {
+	margin:0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	width: 300px;
+	color: white;
+}
+
+ul input:focus {
+	outline: none;
+}
+
+
+ul li {
 	color: #FFFFFF;
 	background-color: grey;
 	margin: 10px 0px;

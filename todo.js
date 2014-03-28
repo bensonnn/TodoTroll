@@ -8,20 +8,24 @@ $(function() {
 		bindEvents : function() {
 			$("form").submit(this.create.bind(this));
 			$("ul").on("click", this.delete.bind(this))
+			$("#items").on("keyup", this.update.bind(this));
 		},
 		create: function(key) {
 			event.preventDefault();
-			if ($('input').val() != "") {
-				var todo = new Todo($('input').val(), this.index)
+			if ($('#new').val() != "") {
+				var todo = new Todo($('#new').val(), this.index)
 				this.index++
-				$('input').val("")
+				$('#new').val("")
 				TodoList.add(todo)
 			}
 		},
+		update: function(key){
+			event.preventDefault();
+			if(key.keyCode == 13)
+			console.log($(key.target).find(".index"))
+		},
 		delete: function(key){
 			if ($(key.target).hasClass("delete"))  {
-				console.log(TodoList.todos)
-				console.log($(key.target).next().text())
 				TodoList.delete($(key.target).next().text())
 			}
 		}
@@ -32,7 +36,7 @@ $(function() {
 		update: function(todos) {
 			$('li').remove();
 			todos.forEach(function(todo) {
-				$('ul').append('<li style="background-color:' + todo.color + '">' + todo.text + '<span class="delete">&times;</span><span class="index">' + todo.index + '</span></li>')
+				$('ul').append('<li style="background-color:' + todo.color + '"><input value="' + todo.text + '"><span class="delete">&times;</span><span class="index">' + todo.index + '</span></li>')
 			})
 		}
 	}
@@ -40,16 +44,16 @@ $(function() {
 
 	function Todo(text, index) {
 		this.text = text;
-		if (text == 'cornify') 
+		if (text == 'cornify')
 			cornify();
 		if (text == 'rick' )
-			this.text = 'rick<iframe width="420" height="315" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+			$('#items').append('<iframe width="375" height="315" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>')
 		this.index = index;
 		this.complete = false;
 		this.color = ColorGen.color();
 	}
-	
-	
+
+
 	Todo.prototype = {
 		finish : function() {
 			this.complete = true;
@@ -64,8 +68,7 @@ $(function() {
 		todos : [],
 		add   : function(todo) {
 			this.todos.push(todo)
-			// console.log(this.todos)
-			TodoView.update(this.todos)				
+			TodoView.update(this.todos)
 		},
 		delete : function(index) {
 			console.log(index)
@@ -78,3 +81,5 @@ $(function() {
 	controller.bindEvents();
 
 })
+
+
