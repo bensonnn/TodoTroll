@@ -21,8 +21,11 @@ $(function() {
 		},
 		update: function(key){
 			event.preventDefault();
-			if(key.keyCode == 13)
-			console.log($(key.target).find(".index"))
+			if(key.keyCode == 13 || key.keyCode == 9) {
+				var index = $(key.target).parent().find(".index").text()
+				var text = $(key.target).val()
+				TodoList.update(index, text)
+			}
 		},
 		delete: function(key){
 			if ($(key.target).hasClass("delete"))  {
@@ -47,7 +50,7 @@ $(function() {
 		if (text == 'cornify')
 			cornify();
 		if (text == 'rick' )
-			$('#items').append('<iframe width="375" height="315" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>')
+			$('#items').append('<iframe width="100%" height="315" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>')
 		this.index = index;
 		this.complete = false;
 		this.color = ColorGen.color();
@@ -68,6 +71,16 @@ $(function() {
 		todos : [],
 		add   : function(todo) {
 			this.todos.push(todo)
+			TodoView.update(this.todos)
+		},
+		update : function(index,text) {
+			this.todos = _.map(this.todos, function(todo){ if (todo.index == index) {
+																														todo.text = text
+																														return todo
+																													} else {
+																														return todo
+																													}
+		});
 			TodoView.update(this.todos)
 		},
 		delete : function(index) {
